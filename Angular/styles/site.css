@@ -1,0 +1,29 @@
+.label {
+    float: left;
+    text-align: right;
+    width: 45%;
+    margin: 6px;
+    color: black;
+}
+
+.text {
+    float: left;
+    width: 45%;
+    margin: 6px;
+}
+
+.lista {
+    width:40%;
+    float:left;
+    margin:6px;
+    padding:10px;
+    border:1px solid black;
+}
+
+.edit {
+    width:30%;
+    float:left;
+    margin:6px;
+    padding:10px;
+    border:1px solid black;
+}

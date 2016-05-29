@@ -3,7 +3,7 @@ namespace Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class DBMigration : DbMigration
     {
         public override void Up()
         {
@@ -15,6 +15,19 @@ namespace Database.Migrations
                         Name = c.String(),
                         Price = c.Double(nullable: false),
                         InStock = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Companies",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Address = c.String(),
+                        City = c.String(),
+                        ZIP = c.String(),
+                        Phone = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -57,6 +70,7 @@ namespace Database.Migrations
                         Tax = c.Double(nullable: false),
                         Other = c.Double(nullable: false),
                         Total = c.Double(nullable: false),
+                        Status = c.Int(nullable: false),
                         BillCustomer_Id = c.Int(),
                         ShipCustomer_Id = c.Int(),
                     })
@@ -81,6 +95,7 @@ namespace Database.Migrations
             DropTable("dbo.Invoices");
             DropTable("dbo.InvoiceEntries");
             DropTable("dbo.Customers");
+            DropTable("dbo.Companies");
             DropTable("dbo.Articles");
         }
     }

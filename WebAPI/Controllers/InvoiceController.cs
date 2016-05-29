@@ -1,28 +1,31 @@
 ﻿using Database;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class CustomerController : BaseController<Customer>
+    public class InvoiceController : BaseController<Invoice>
     {
-        public CustomerController(Repository<Customer> depo) : base(depo)
+        public InvoiceController(Repository<Invoice> depo) : base(depo)
         { }
-        
+
         public IHttpActionResult Get()
         {
             try
             {
-                var customers = Repository.Get().ToList().Select(x => Factory.Create(x));
-                if (customers == null)
-                { 
+                var invoices = Repository.Get().ToList().Select(x => Factory.Create(x));
+                if (invoices == null)
+                {
                     return NotFound();
                 }
                 else
                 { 
-                    return Ok(customers);
+                    return Ok(invoices);
                 }
             }
             catch (Exception ex)
@@ -30,17 +33,18 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
+
         public IHttpActionResult Get(int id)
         {
             try
             {
-                Customer customer = Repository.Get(id);
-                if (customer == null)
+                Invoice invoice = Repository.Get(id);
+                if (invoice == null)
                 {
                     return NotFound();
                 }
-                else { 
+                else
+                { 
                     return Ok(Factory.Create(Repository.Get(id)));
                 }
             }
@@ -49,20 +53,21 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
-        public IHttpActionResult Post(CustomerModel model)
+
+        public IHttpActionResult Post(InvoiceModel model)
         {
             var sch = Repository.BaseContext();
             try
             {
                 if (model == null)
-                { 
-                    return NotFound();
+                {
+                    return BadRequest();
                 }
                 else
                 {
-                    Repository.Insert(Parser.Create(model, sch));
-                    return Ok(model);
+                    Invoice invoice = Parser.Create(model, sch);
+                    Repository.Insert(invoice);
+                    return Ok(Factory.Create(invoice));                 
                 }
             }
             catch (Exception ex)
@@ -71,15 +76,15 @@ namespace WebAPI.Controllers
             }
 
         }
-        
-        public IHttpActionResult Put(int id, CustomerModel model)
+
+        public IHttpActionResult Put(int id, InvoiceModel model)
         {
             var sch = Repository.BaseContext();
             try
             {
-                Customer customer = Repository.Get(id);
-                if (customer == null || model == null)
-                { 
+                Invoice invoice = Repository.Get(id);
+                if (invoice == null || model == null)
+                {
                     return NotFound();
                 }
                 else
@@ -93,13 +98,13 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
+
         public IHttpActionResult Delete(int id)
         {
             try
             {
-                Customer customer = Repository.Get(id);
-                if (customer == null)
+                Invoice invoice = Repository.Get(id);
+                if (invoice == null)
                 {
                     return NotFound();
                 }

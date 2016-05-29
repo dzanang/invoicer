@@ -22,8 +22,9 @@ namespace DataSeed
         {
             Console.Clear();
 
+            getComp();
             getCust();
-            getArt();                                    
+            getArt();                                                
             Console.ReadKey();
         }
 
@@ -62,9 +63,31 @@ namespace DataSeed
                 customer.City = getString(row, 3);
                 customer.ZIP = getString(row, 4);
                 customer.Phone = getString(row, 5);
-
+                
                 N++;
                 context.Customers.Add(customer);
+            }
+            context.SaveChanges();
+            Console.WriteLine(N);
+        }
+
+        static void getComp()
+        {
+            Console.Write("Seeding Companies: ");
+            DataTable rawData = OpenExcel(sourceData, "Company");
+
+            int N = 0;
+            foreach (DataRow row in rawData.Rows)
+            {
+                Company company = new Company();
+                company.Name = getString(row, 0);
+                company.Address = getString(row, 1);
+                company.City = getString(row, 2);
+                company.ZIP = getString(row, 3);
+                company.Phone = getString(row, 4);
+
+                N++;
+                context.Companies.Add(company);
             }
             context.SaveChanges();
             Console.WriteLine(N);

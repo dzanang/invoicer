@@ -50,14 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Interface.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoiceEntry.cs" />
     <Compile Include="InvoiceStatus.cs" />
-    <Compile Include="Migrations\201605272357517_InitialMigration.cs" />
-    <Compile Include="Migrations\201605272357517_InitialMigration.Designer.cs">
-      <DependentUpon>201605272357517_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201605291237366_DBMigration.cs" />
+    <Compile Include="Migrations\201605291237366_DBMigration.Designer.cs">
+      <DependentUpon>201605291237366_DBMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,8 +70,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605272357517_InitialMigration.resx">
-      <DependentUpon>201605272357517_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605291237366_DBMigration.resx">
+      <DependentUpon>201605291237366_DBMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

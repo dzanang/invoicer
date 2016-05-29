@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Database
 {
     public class Invoice
     {
+
+        public Invoice()
+        {
+            Entries = new Collection<InvoiceEntry>();
+        }
+
         [Key]
         public int Id { get; set; }
-        public Customer BillCustomer { get; set; }
-        public Customer ShipCustomer { get; set; }
+        public virtual Customer BillCustomer { get; set; }
+        public virtual Customer ShipCustomer { get; set; }
         public DateTime Date { get; set; }
         public double Tax { get; set; }
         public double Other { get; set; }

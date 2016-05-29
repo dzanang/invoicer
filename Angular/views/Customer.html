@@ -1,0 +1,57 @@
+﻿<div ng-controller="CustomerController">
+    <div class="edit panel">
+        <div>
+            <input class="btn btn-info" type="button" value="Save data" ng-click="saveData()" />
+            <input class="btn btn-success" type="button" value="New Customer" ng-click="newCustomer()" />
+            <hr>
+        </div>
+        <div class="text">Id:</div>
+        <div class="text"><input type="text" ng-model="customer.id"></div>
+        <div class="text">Name:</div>
+        <div class="text"><input type="text" ng-model="customer.name"></div>
+        <div class="text">Company Name:</div>
+        <div class="text"><input type="text" ng-model="customer.companyName"></div>
+        <div class="text">Address:</div>
+        <div class="text"><input type="text" ng-model="customer.address"></div>
+        <div class="text">City:</div>
+        <div class="text"><input type="text" ng-model="customer.city"></div>
+        <div class="text">ZIP:</div>
+        <div class="text"><input type="text" ng-model="customer.zip"></div>
+        <div class="text">Phone:</div>
+        <div class="text"><input type="text" ng-model="customer.phone"></div>
+    </div>
+
+    <div class="lista panel">
+        Filter: <input class="form-control" type="search" ng-model="selCustomer">
+        Order:
+        <select class="form-control" ng-model="sortOrder">
+            <option value="+name">Name</option>
+            <option value="+comapnyName">Company Name</option>
+            <option value="-city">City</option>
+        </select>
+        <div>
+            <br />
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="font-weight:bold">
+                        <th width="20%">Name</th>
+                        <th width="30%">Company Name</th>
+                        <th width="20%">Address</th>
+                        <th width="20%">City</th>
+                        <th width="10%">ZIP</th>
+                        <th width="20%">Phone</th>
+                        <th width="10%">Delete</th>
+                    </tr>
+                    <tr ng-repeat="item in customers | orderBy: sortOrder | filter: selCustomer">
+                        <td width="20%"><a href="#/customer" ng-click="transfer(item)">{{ item.name }}</a></td>
+                        <td width="30%"> {{ item.companyName }}</td>
+                        <td width="20%"> {{ item.address }}</td>
+                        <td width="20%"> {{item.city}}</td>
+                        <td width="10%"> {{ item.zip }}</td>
+                        <td width="20%"> {{ item.phone }}</td>
+                        <td><button type="button" value="Delete" class="glyphicon glyphicon-trash" style="color:red" ng-click="transfer(item); deleteData();"></button></td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿<div ng-controller="ArticleController">
+    <div class="edit panel">
+        <div>
+            <input class="btn btn-info" type="button" value="Save data" ng-click="saveData()" />
+            <input class="btn btn-success" type="button" value="New Article" ng-click="newArticle()" />
+            <hr>
+        </div>
+        <div class="text">Id:</div>
+        <div class="text"><input type="text" ng-model="article.id"></div>
+        <div class="text">Name:</div>
+        <div class="text"><input type="text" ng-model="article.name"></div>
+        <div class="text">Price:</div>
+        <div class="text"><input type="text" ng-model="article.price"></div>
+        <div class="text">In Stock:</div>
+        <div class="text"><input type="text" ng-model="article.inStock"></div>
+    </div>
+
+    <div class="lista panel">
+        Filter: <input class="form-control" type="search" ng-model="selArticle">
+        Order:
+        <select class="form-control" ng-model="sortOrder">
+            <option value="+name">Name</option>
+            <option value="+price">Price</option>
+            <option value="-inStock">In Stock</option>
+        </select>
+        <div>
+            <br />
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="font-weight:bold">
+                        <th width="20%">Name</th>
+                        <th width="30%">Price</th>
+                        <th width="20%">In Stock</th>
+                        <th width="10%">Delete</th>
+                    </tr>
+                    <tr ng-repeat="item in articles | orderBy: sortOrder | filter: selArticle">
+                        <td width="20%"><a href="#/article" ng-click="transfer(item)">{{ item.name }}</a></td>
+                        <td width="30%"> {{ item.price }}</td>
+                        <td width="20%"> {{ item.inStock }}</td>
+                        <td><button type="button" value="Delete" class="glyphicon glyphicon-trash" style="color:red" ng-click="transfer(item); deleteData();"></button></td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>

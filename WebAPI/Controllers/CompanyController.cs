@@ -6,23 +6,23 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class CustomerController : BaseController<Customer>
+    public class CompanyController : BaseController<Company>
     {
-        public CustomerController(Repository<Customer> depo) : base(depo)
+        public CompanyController(Repository<Company> depo) : base(depo)
         { }
-        
+
         public IHttpActionResult Get()
         {
             try
             {
-                var customers = Repository.Get().ToList().Select(x => Factory.Create(x));
-                if (customers == null)
-                { 
+                var companies = Repository.Get().ToList().Select(x => Factory.Create(x));
+                if (companies == null)
+                {
                     return NotFound();
                 }
                 else
-                { 
-                    return Ok(customers);
+                {
+                    return Ok(companies);
                 }
             }
             catch (Exception ex)
@@ -30,17 +30,18 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
+
         public IHttpActionResult Get(int id)
         {
             try
             {
-                Customer customer = Repository.Get(id);
-                if (customer == null)
+                Company company = Repository.Get(id);
+                if (company == null)
                 {
                     return NotFound();
                 }
-                else { 
+                else
+                {
                     return Ok(Factory.Create(Repository.Get(id)));
                 }
             }
@@ -49,14 +50,14 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
-        public IHttpActionResult Post(CustomerModel model)
+
+        public IHttpActionResult Post(CompanyModel model)
         {
             var sch = Repository.BaseContext();
             try
             {
                 if (model == null)
-                { 
+                {
                     return NotFound();
                 }
                 else
@@ -71,15 +72,15 @@ namespace WebAPI.Controllers
             }
 
         }
-        
-        public IHttpActionResult Put(int id, CustomerModel model)
+
+        public IHttpActionResult Put(int id, CompanyModel model)
         {
             var sch = Repository.BaseContext();
             try
             {
-                Customer customer = Repository.Get(id);
-                if (customer == null || model == null)
-                { 
+                Company company = Repository.Get(id);
+                if (company == null || model == null)
+                {
                     return NotFound();
                 }
                 else
@@ -93,13 +94,13 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
-        
+
         public IHttpActionResult Delete(int id)
         {
             try
             {
-                Customer customer = Repository.Get(id);
-                if (customer == null)
+                Company company = Repository.Get(id);
+                if (company == null)
                 {
                     return NotFound();
                 }

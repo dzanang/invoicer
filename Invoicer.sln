@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed", "Seed\Seed.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{A96D1008-7CE7-4932-B1BA-11CF5939BE51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular", "Angular\Angular.csproj", "{66654841-5502-4B4B-ACEE-AE09AABEB778}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A96D1008-7CE7-4932-B1BA-11CF5939BE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A96D1008-7CE7-4932-B1BA-11CF5939BE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A96D1008-7CE7-4932-B1BA-11CF5939BE51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66654841-5502-4B4B-ACEE-AE09AABEB778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66654841-5502-4B4B-ACEE-AE09AABEB778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66654841-5502-4B4B-ACEE-AE09AABEB778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66654841-5502-4B4B-ACEE-AE09AABEB778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
