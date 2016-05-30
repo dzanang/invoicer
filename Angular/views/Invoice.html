@@ -68,18 +68,46 @@
     <div class="modal-dialog">
         <div class="modal-body">
             <div class="panel">
-                <div class="text">Id:</div>
-                <div class="text"><input type="text" ng-model="invoice.id"></div>
                 <div class="text">Bill Customer:</div>
-                <div class="text"><select type="text" ng-model="invoice.billCustomer" ng-options="billCustomer.id as customer.name for customer in customers"></select></div>
+                <div class="text"><select type="text" ng-model="newInvoiceObject.billCustomerId" ng-options="customer.id as customer.name for customer in customers"></select></div>
                 <div class="text">Ship Customer:</div>
-                <div class="text"><select type="text" ng-model="invoice.shipCustomer" ng-options="shipCustomer.id as customer.name for customer in customers"></select></div>
+                <div class="text"><select type="text" ng-model="newInvoiceObject.shipCustomerId" ng-options="customer.id as customer.name for customer in customers"></select></div>
                 <div class="text">Date:</div>
-                <div class="text"><input type="text" ng-model="invoice.date"></div>
+                <div class="text"><input type="text" ng-model="newInvoiceObject.date"></div>
                 <div class="text">Other:</div>
-                <div class="text"><input type="text" ng-model="invoice.other"></div>
+                <div class="text"><input type="text" ng-model="newInvoiceObject.other"></div>
                 <div class="text">Status:</div>
-                <div class="text"><select type="text" ng-model="invoice.status" ng-options="key as value for (key, value) in invoiceStatus"></select></div>
+                <div class="text"><select type="text" ng-model="newInvoiceObject.status" ng-options="key as value for (key, value) in invoiceStatus"></select></div>
+            
+                <div>
+                    <div class="text">Product</div>
+                    <div class="text"><select type="text" ng-model="newEntryProductId" ng-options="article.id as article.name for article in articles"></select></div>
+                    <div class="text">Quantity</div>
+                    <input type="text" ng-model="newEntryProductQuantity" />
+                    <input type="button" ng-click="addInvoiceItem()" value="Add Entry"/>
+                </div>
+                <input type="button" ng-click="saveData()" value="Save invoce" data-dismiss="modal" />
+
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Item name</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in newInvoiceObject.entries">
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.price }}</td>
+                                <td>{{ item.quantity }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

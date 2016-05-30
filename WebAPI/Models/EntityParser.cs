@@ -12,16 +12,23 @@ namespace WebAPI.Models
                 BillCustomer = context.Customers.Find(model.BillCustomerId),
                 ShipCustomer = context.Customers.Find(model.ShipCustomerId),
                 Date = model.Date,
-                Tax = model.Tax,
                 Other = model.Other,
-                Total = model.Total,
                 Status = model.Status,
                 Entries = new System.Collections.Generic.List<InvoiceEntry>()
             };
+            double untaxedPrice = 0;
             foreach (var item in model.Entries)
             {
-                result.Entries.Add(Create(item, context, result));
+                InvoiceEntry invoiceEntry = Create(item, context, result);
+                result.Entries.Add(invoiceEntry);
+                untaxedPrice += invoiceEntry.Price;
             }
+
+            //TODO: make tax configurable
+            double taxedPrice = untaxedPrice + (untaxedPrice * 0.17);
+            result.Total = taxedPrice + result.Other;
+            result.Tax = 17;
+
             return result;
         }
 
@@ -65,14 +72,16 @@ namespace WebAPI.Models
 
         public InvoiceEntry Create(InvoiceEntryModel model, InvoicerContext context, Invoice invoice)
         {
-            return new InvoiceEntry()
+            InvoiceEntry result = new InvoiceEntry()
             {
                 Id = model.Id,
                 Article = context.Articles.Find(model.Article),
                 Invoice = invoice,
-                Price = model.Price,
                 Quantity = model.Quantity
             };
+
+            result.Price = result.Quantity * result.Article.Price;
+            return result;
         }
     }
 }

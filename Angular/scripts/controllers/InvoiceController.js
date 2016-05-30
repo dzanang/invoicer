@@ -3,10 +3,12 @@
     var app = angular.module("invoicer");
 
     app.controller("InvoiceController", function ($scope, $rootScope, DataService) {
-
         var dataSet = "invoice";
         var articlesDataSet = "article";
         var customersDataSet = "customer";
+
+        $scope.newInvoiceObject = {};
+        $scope.newInvoiceObject.entries = [];
         $scope.selString = "";
         $scope.sortOrder = "";
         fetchData();
@@ -41,43 +43,39 @@
             $scope.invoice = item;
         };
 
-        $scope.newInvoice = function () {
-            $scope.invoice = {
-                id: 0,
-                billCustomerId: "",
-                shipCustomerId: "",
-                date: new Date(),
-                other: 0,
-                status: 0,
-            };
+        $scope.invoiceStatus = {
+            "1": "Draft",
+            "2": "Issued",
+            "3": "Payed",
+            "4": "Canceled"
+        };
 
-            $scope.invoiceStatus = {
-                "1": "Draft",
-                "2": "Issued",
-                "3": "Payed",
-                "4": "Canceled"                
-            };
+        $scope.addInvoiceItem = function () {
+            var item = {};
+            item.quantity = $scope.newEntryProductQuantity;
+            item.article = $scope.newEntryProductId;
+            $scope.newInvoiceObject.entries.push(item);
+        }
 
-            $scope.addItem = function () {
-                $scope.newInvoice.entries.push({
-                    Article: 0,
-                    Quantity: 0,
-                    Price: 0.0
+        $scope.saveData = function () {
+            if (!$scope.newInvoiceObject.id) {
+                DataService.create(dataSet, $scope.newInvoiceObject, function (data) {
+                    $scope.invoices.push(data);
                 });
             }
-
-            $scope.deleteData = function () {
-                DataService.delete(dataSet, $scope.invoice.id, function (data) { fetchData() });
+            else {
+                DataService.update(dataSet, $scope.newInvoiceObject.id, $scope.newInvoiceObject, function (data) { fetchData(); });
             }
+            // Reset state`
+            $scope.newInvoiceObject = {};
+            $scope.newInvoiceObject.entries = [];
+        }
 
-            $scope.saveData = function () {
-                if ($scope.invoice.id == 0) {
-                    DataService.create(dataSet, $scope.invoice, function (data) { fetchData(); });
-                }
-                else {
-                    DataService.update(dataSet, $scope.invoice.id, $scope.invoice, function (data) { fetchData(); });
-                }
-            }
+        $scope.newInvoice = function () {
+        }
+
+        $scope.deleteData = function () {
+            DataService.delete(dataSet, $scope.invoice.id, function (data) { fetchData() });
         }
     });
 }());
