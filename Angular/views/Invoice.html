@@ -1,8 +1,13 @@
 ﻿<div ng-controller="InvoiceController">
-    <div class="edit panel">
+
+    <div>
+        <input class="btn btn-info" type="button" value="Save data" ng-click="saveData()" />
+        <input class="btn btn-success" type="button" value="New Invoice" data-toggle="modal" data-target="#invoice" ng-click="newInvoice()" />
+    </div>
+    <!--<div class="edit panel">
         <div>
             <input class="btn btn-info" type="button" value="Save data" ng-click="saveData()" />
-            <input class="btn btn-success" type="button" value="New Invoice" ng-click="newInvoice()" />
+            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#invoice" ng-click="newInvoice()">New Invoice</button>
             <hr>
         </div>
         <div class="text">Id:</div>
@@ -18,7 +23,7 @@
         <div class="text">Status:</div>
         <div class="text"><select type="text" ng-model="invoice.status" ng-options="key as value for (key, value) in invoiceStatus"></select></div>
         <button ng-click="addItem()">Add Item</button>
-    </div>
+    </div>-->
 
     <div class="lista panel">
         Filter: <input class="form-control" type="search" ng-model="selInvoice">
@@ -44,7 +49,7 @@
                         <th width="10%">Delete</th>
                     </tr>
                     <tr ng-repeat="item in invoices | orderBy: sortOrder | filter: selInvoice">
-                        <td width="20%"><a href="#/invoice" ng-click="transfer(item)">{{ item.billCustomer.name }}</a></td>
+                        <td width="20%"><a href="#/invoice" ng-click="transfer(item)" data-toggle="modal" data-target="#invoice">{{ item.billCustomer.name }}</a></td>
                         <td width="30%"> {{ item.shipCustomer.name }}</td>
                         <td width="20%"> {{ item.date }}</td>
                         <td width="20%"> {{item.tax}}</td>
@@ -55,6 +60,27 @@
                         <td><button type="button" value="Delete" class="glyphicon glyphicon-trash" style="color:red" ng-click="transfer(item); deleteData();"></button></td>
                     </tr>
             </table>
+        </div>
+    </div>
+</div>
+
+<div id="invoice" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-body">
+            <div class="panel">
+                <div class="text">Id:</div>
+                <div class="text"><input type="text" ng-model="invoice.id"></div>
+                <div class="text">Bill Customer:</div>
+                <div class="text"><select type="text" ng-model="invoice.billCustomer" ng-options="billCustomer.id as customer.name for customer in customers"></select></div>
+                <div class="text">Ship Customer:</div>
+                <div class="text"><select type="text" ng-model="invoice.shipCustomer" ng-options="shipCustomer.id as customer.name for customer in customers"></select></div>
+                <div class="text">Date:</div>
+                <div class="text"><input type="text" ng-model="invoice.date"></div>
+                <div class="text">Other:</div>
+                <div class="text"><input type="text" ng-model="invoice.other"></div>
+                <div class="text">Status:</div>
+                <div class="text"><select type="text" ng-model="invoice.status" ng-options="key as value for (key, value) in invoiceStatus"></select></div>
+            </div>
         </div>
     </div>
 </div>

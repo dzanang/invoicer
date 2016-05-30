@@ -1,0 +1,52 @@
+﻿<div ng-controller="CompanyController">
+    <div class="edit panel">
+        <div>
+            <input class="btn btn-info" type="button" value="Save data" ng-click="saveData()" />
+            <input class="btn btn-success" type="button" value="New Company" ng-click="newCompany()" />
+            <hr>
+        </div>
+        <div class="text">Id:</div>
+        <div class="text"><input type="text" ng-model="company.id"></div>
+        <div class="text">Name:</div>
+        <div class="text"><input type="text" ng-model="company.name"></div>
+        <div class="text">Address:</div>
+        <div class="text"><input type="text" ng-model="company.address"></div>
+        <div class="text">City:</div>
+        <div class="text"><input type="text" ng-model="company.city"></div>
+        <div class="text">ZIP:</div>
+        <div class="text"><input type="text" ng-model="company.zip"></div>
+        <div class="text">Phone:</div>
+        <div class="text"><input type="text" ng-model="company.phone"></div>
+    </div>
+
+    <div class="lista panel">
+        Filter: <input class="form-control" type="search" ng-model="selCompany">
+        Order:
+        <select class="form-control" ng-model="sortOrder">
+            <option value="+name">Name</option>
+            <option value="-city">City</option>
+        </select>
+        <div>
+            <br />
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="font-weight:bold">
+                        <th width="20%">Name</th>
+                        <th width="20%">Address</th>
+                        <th width="20%">City</th>
+                        <th width="10%">ZIP</th>
+                        <th width="20%">Phone</th>
+                        <th width="10%">Delete</th>
+                    </tr>
+                    <tr ng-repeat="item in companies | orderBy: sortOrder | filter: selCompany">
+                        <td width="20%"><a href="#/company" ng-click="transfer(item)">{{ item.name }}</a></td>
+                        <td width="20%"> {{ item.address }}</td>
+                        <td width="20%"> {{item.city}}</td>
+                        <td width="10%"> {{ item.zip }}</td>
+                        <td width="20%"> {{ item.phone }}</td>
+                        <td><button type="button" value="Delete" class="glyphicon glyphicon-trash" style="color:red" ng-click="transfer(item); deleteData();"></button></td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>

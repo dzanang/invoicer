@@ -13,6 +13,7 @@
             .when("/customer", { templateUrl: "views/customer.html", controller: "CustomerController" })
             .when("/article", { templateUrl: "views/article.html", controller: "ArticleController" })
             .when("/invoice", { templateUrl: "views/invoice.html", controller: "InvoiceController" })
+            .when("/company", {templateUrl: "views/company.html", controller: "CompanyController" })
             .otherwise({ redirectTo: "/customer" });
     });
 
