@@ -1,9 +1,9 @@
-﻿<div ng-controller="InvoiceController">
+﻿<div ng-controller="EntryController">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="invoice-title">
-                    <h2>Invoice</h2><h3 class="pull-right" ng-model="invoice.id"></h3>
+                    <h2>Invoice</h2><h3 class="pull-right">{{invoice.id}}</h3>
                 </div>
                 <hr>
                 <div class="row">
@@ -11,10 +11,10 @@
                         <address>
                             <strong>Billed To:</strong><br>
                             <ul>
-                                <li ng-model="bucket.invoice.billCustomer.name"></li>
-                                <li ng-model="invoice.billCustomer.address"></li>
-                                <li ng-model="invoice.billCustomer.zip"></li>
-                                <li ng-model="invoice.billCustomer.city"></li>
+                                <li>{{invoice.billCustomer.name}}</li>
+                                <li>{{invoice.billCustomer.address}}</li>
+                                <li ng-model="invoice.billCustomer.zip">{{}}</li>
+                                <li ng-model="invoice.billCustomer.city">{{}}</li>
                             </ul>
                         </address>
                     </div>
@@ -59,7 +59,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    //invoice entries
+                                    <tr ng-repeat="entry in invoice.entries">
+                                        <td>{{entry.articleName}}</td>
+                                        <td>{{entry.price}}</td>
+                                        <td>{{entry.quantity}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

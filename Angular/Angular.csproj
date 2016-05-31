@@ -141,6 +141,7 @@
     <Content Include="scripts\controllers\CustomerController.js" />
     <Content Include="scripts\controllers\EntryController.js" />
     <Content Include="scripts\controllers\InvoiceController.js" />
+    <Content Include="scripts\services\InvoiceService.js" />
     <Content Include="scripts\services\DataService.js" />
     <Content Include="styles\site.css" />
     <Content Include="views\Article.html" />

@@ -2,7 +2,7 @@
 
     var app = angular.module("invoicer");
 
-    app.controller("InvoiceController", function ($scope, $rootScope, DataService) {
+    app.controller("InvoiceController", function ($scope, $rootScope, DataService, InvoiceService) {
         var dataSet = "invoice";
         var articlesDataSet = "article";
         var customersDataSet = "customer";
@@ -35,10 +35,7 @@
         }
 
         $scope.transfer = function (item) {
-            $scope.invoice = item;
-            //this.invoice = item;
-            //$scope.bucket = {};
-            //$scope.bucket.invoice = item;
+            InvoiceService.setInvoice(item);
         };
 
         $scope.invoiceStatus = {

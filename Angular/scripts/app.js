@@ -14,7 +14,7 @@
             .when("/article", { templateUrl: "views/article.html", controller: "ArticleController" })
             .when("/invoice", { templateUrl: "views/invoice.html", controller: "InvoiceController" })
             .when("/company", { templateUrl: "views/company.html", controller: "CompanyController" })
-            .when("/invoiceprint", { templateUrl: "views/invoiceprint.html", controller: "InvoiceController" })
+            .when("/invoiceprint", { templateUrl: "views/invoiceprint.html", controller: "EntryController" })
             .otherwise({ redirectTo: "/customer" });
     });
 
