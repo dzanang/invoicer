@@ -25,5 +25,6 @@ namespace WebAPI.Models
         public double Total { get; set; }
         public InvoiceStatus Status { get; set; }
         public IList<InvoiceEntryModel> Entries { get; set; }
+        public string InvoiceStatus { get; set; }
     }
 }

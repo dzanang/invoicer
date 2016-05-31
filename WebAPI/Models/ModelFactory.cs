@@ -54,6 +54,7 @@ namespace WebAPI.Models
                 Other = inv.Other,
                 Total = inv.Total,
                 Status = inv.Status,
+                InvoiceStatus = inv.Status.ToString(),
                 BillCustomer = Create(inv.BillCustomer),
                 ShipCustomer = Create(inv.ShipCustomer)
             };
