@@ -11,8 +11,11 @@ namespace WebAPI.Controllers
 {
     public class InvoiceController : BaseController<Invoice>
     {
-        public InvoiceController(Repository<Invoice> depo) : base(depo)
-        { }
+        private Repository<InvoiceEntry> invoiceRepo;
+        public InvoiceController(Repository<Invoice> depo, Repository<InvoiceEntry> invoiceRepo) : base(depo)
+        {
+            this.invoiceRepo = invoiceRepo;
+        }
 
         public IHttpActionResult Get()
         {
@@ -24,7 +27,7 @@ namespace WebAPI.Controllers
                     return NotFound();
                 }
                 else
-                { 
+                {
                     return Ok(invoices);
                 }
             }
@@ -44,7 +47,7 @@ namespace WebAPI.Controllers
                     return NotFound();
                 }
                 else
-                { 
+                {
                     return Ok(Factory.Create(Repository.Get(id)));
                 }
             }
@@ -67,7 +70,7 @@ namespace WebAPI.Controllers
                 {
                     Invoice invoice = Parser.Create(model, sch);
                     Repository.Insert(invoice);
-                    return Ok(Factory.Create(invoice));                 
+                    return Ok(Factory.Create(invoice));
                 }
             }
             catch (Exception ex)
@@ -104,12 +107,22 @@ namespace WebAPI.Controllers
             try
             {
                 Invoice invoice = Repository.Get(id);
+
                 if (invoice == null)
                 {
                     return NotFound();
                 }
                 else
                 {
+                    var toDelete = new List<int>();
+                    foreach (var entry in invoice.Entries)
+                    {
+                        toDelete.Add(entry.Id);                        
+                    }
+                    foreach(var entryId in toDelete)
+                    {
+                        invoiceRepo.Delete(entryId);
+                    }
                     Repository.Delete(id);
                     return Ok();
                 }

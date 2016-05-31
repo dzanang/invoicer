@@ -1,0 +1,71 @@
+﻿<div ng-controller="InvoiceController">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="invoice-title">
+                    <h2>Invoice</h2><h3 class="pull-right" ng-model="invoice.id"></h3>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <address>
+                            <strong>Billed To:</strong><br>
+                            <ul>
+                                <li ng-model="bucket.invoice.billCustomer.name"></li>
+                                <li ng-model="invoice.billCustomer.address"></li>
+                                <li ng-model="invoice.billCustomer.zip"></li>
+                                <li ng-model="invoice.billCustomer.city"></li>
+                            </ul>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>Shipped To:</strong><br>
+                            <ul>
+                                <li ng-model="invoice.shipCustomer.name"></li>
+                                <li ng-model="invoice.shipCustomer.address"></li>
+                                <li ng-model="invoice.shipCustomer.zip"></li>
+                                <li ng-model="invoice.shipCustomer.city"></li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>Order Date:</strong><br>
+                            <div class="text"><input type="text" ng-model="invoice.date"></div><br><br>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Order summary</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td><strong>Item Name</strong></td>
+                                        <td class="text-center"><strong>Price</strong></td>
+                                        <td class="text-center"><strong>Quantity</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    //invoice entries
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

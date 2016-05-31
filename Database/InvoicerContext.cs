@@ -14,5 +14,5 @@ namespace Database
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceEntry> InvoiceEntries { get; set; }
         public DbSet<Company> Companies { get; set; }
-    }
+    }    
 }
