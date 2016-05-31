@@ -12,9 +12,11 @@ namespace WebAPI.Controllers
     public class InvoiceController : BaseController<Invoice>
     {
         private Repository<InvoiceEntry> invoiceRepo;
-        public InvoiceController(Repository<Invoice> depo, Repository<InvoiceEntry> invoiceRepo) : base(depo)
+        private Repository<Article> articleRepo;
+        public InvoiceController(Repository<Invoice> depo, Repository<InvoiceEntry> invoiceRepo, Repository<Article> articleRepo) : base(depo)
         {
             this.invoiceRepo = invoiceRepo;
+            this.articleRepo = articleRepo;
         }
 
         public IHttpActionResult Get()
@@ -70,6 +72,17 @@ namespace WebAPI.Controllers
                 {
                     Invoice invoice = Parser.Create(model, sch);
                     Repository.Insert(invoice);
+
+                    foreach (var entry in invoice.Entries)
+                    {
+                        entry.Article.InStock = entry.Article.InStock - entry.Quantity;
+
+                        if (entry.Article.InStock < 0) {
+                            return BadRequest();
+                        }
+
+                        articleRepo.Update(entry.Article, entry.Article.Id);
+                    }
                     return Ok(Factory.Create(invoice));
                 }
             }
@@ -117,7 +130,9 @@ namespace WebAPI.Controllers
                     var toDelete = new List<int>();
                     foreach (var entry in invoice.Entries)
                     {
-                        toDelete.Add(entry.Id);                        
+                        toDelete.Add(entry.Id);
+                        entry.Article.InStock = entry.Article.InStock + entry.Quantity;
+                        articleRepo.Update(entry.Article, entry.Article.Id);                  
                     }
                     foreach(var entryId in toDelete)
                     {
